@@ -1,6 +1,7 @@
 package com.xdja.quartz.zh.service;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,18 +11,17 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service("jobInitService")
+@Slf4j
 public class JobInitService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(JobInitService.class);
 
 	@Resource
 	private Scheduler scheduler;
-
 
 	public <T extends Job> void doInitJob(String cron, String key, String group, Class<T> tClass) {
 
 		try {
 
-			LOGGER.info("开始初始化任务:{}, cron:{}, key:{}, group:{}", tClass.getName(), cron, key, group);
+			log.info("开始初始化任务:{}, cron:{}, key:{}, group:{}", tClass.getName(), cron, key, group);
 			JobKey jobKey = createJobKey(key, group);
 
 			JobDetail jobDetail;
@@ -41,7 +41,7 @@ public class JobInitService {
 
 		} catch (SchedulerException e) {
 
-			LOGGER.error("初始化任务 [{}] 异常", tClass.getName(), e);
+			log.error("初始化任务 [{}] 异常", tClass.getName(), e);
 		}
 	}
 

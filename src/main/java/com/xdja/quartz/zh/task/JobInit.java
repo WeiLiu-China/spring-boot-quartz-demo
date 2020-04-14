@@ -2,16 +2,15 @@ package com.xdja.quartz.zh.task;
 
 
 import com.xdja.quartz.zh.service.JobInitService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class JobInit {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(JobInit.class);
-
 
 	@Autowired
 	private JobInitService jobInitService;
@@ -19,10 +18,10 @@ public class JobInit {
 
 	public void init() {
 		try {
-			LOGGER.info("开始初始化job");
+			log.info("开始初始化job");
 			schedulerRefreshExportJob();
 		} catch (Exception e) {
-			LOGGER.error("初始化异常");
+			log.error("初始化异常");
 		}
 	}
 
