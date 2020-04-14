@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-@Service("jobInitService")
+@Service
 @Slf4j
 public class JobInitService {
 
